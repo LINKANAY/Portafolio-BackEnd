@@ -1,9 +1,12 @@
 
 package com.portafolio.BackEnd.controllers;
 
+import com.portafolio.BackEnd.models.Educacion;
 import com.portafolio.BackEnd.models.Persona;
+import com.portafolio.BackEnd.services.EducacionService;
 import com.portafolio.BackEnd.services.PersonaService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
     
     @Autowired PersonaService personaService;
+    @Autowired EducacionService educacionService;
     
     @PostMapping("persona/crear")
     public String crearPersona(@RequestBody Persona persona){
@@ -44,8 +48,13 @@ public class PersonaController {
         perso.setTitulo(persona.getTitulo());
         perso.setEmail(persona.getEmail());
         perso.setFoto(persona.getFoto());
-        return perso;
-        
+        personaService.crearPersona(perso);
+        return perso;        
+    }
+    
+    @GetMapping ("persona/traer/estudios/{id}")
+    public Set<Educacion> verEducaciones(@PathVariable Long id){
+        return personaService.encontrarPersona(id).getEstudios();
     }
     
 }

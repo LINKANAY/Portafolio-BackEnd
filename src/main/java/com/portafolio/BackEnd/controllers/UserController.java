@@ -40,6 +40,7 @@ public class UserController {
         User user1 = userService.encontrarUser(id);
         user1.setUsuario(user.getUsuario());
         user1.setContraseña(user.getContraseña());
+        userService.crearUser(user1);
         return user1;
 
     }

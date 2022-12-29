@@ -40,6 +40,7 @@ public class SkillController {
         Skill ski = skillService.encontrarSkill(id);
         ski.setSkill(skill.getSkill());
         ski.setPorcentaje(skill.getPorcentaje());
+        skillService.crearSkill(ski);
         return ski;
         
     }

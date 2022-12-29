@@ -43,6 +43,7 @@ public class ExperienciaLaboralController {
         expe.setFechaInicio(experiencia.getFechaInicio());
         expe.setFechaFin(experiencia.getFechaFin());
         expe.setLogo(experiencia.getLogo());
+        experienciaLaboralService.crearExperiencia(expe);
         return expe;
         
     }

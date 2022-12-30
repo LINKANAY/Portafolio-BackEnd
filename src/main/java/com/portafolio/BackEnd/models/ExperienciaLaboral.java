@@ -1,5 +1,6 @@
 package com.portafolio.BackEnd.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +25,9 @@ public class ExperienciaLaboral {
     private Long id;
     private String nombre;
     private String cargo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate fechaInicio;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate fechaFin;
     private List<String> tareas;
     private String logo;
@@ -40,11 +43,11 @@ public class ExperienciaLaboral {
     public ExperienciaLaboral() {
     }
 
-    public ExperienciaLaboral(String nombre, String cargo, LocalDate fechaInicio, LocalDate fechaFin, List<String> tareas, String logo, Persona persona, Ubicacion ubicacion) {
+    public ExperienciaLaboral(String nombre, String cargo, String fechaInicio, String fechaFin, List<String> tareas, String logo, Persona persona, Ubicacion ubicacion) {
         this.nombre = nombre;
         this.cargo = cargo;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaInicio = LocalDate.parse(fechaInicio);
+        this.fechaFin = LocalDate.parse(fechaFin);
         this.tareas = tareas;
         this.logo = logo;
         this.persona = persona;
